@@ -1,0 +1,17 @@
+{
+  "author": "Thorsten Lorenz <thlorenz@gmx.de> (thorstenlorenz.wordpress.com)",
+  "name": "sandbox",
+  "description": "Trying out various things related to javascript, jquery, nodejs etc.,",
+  "version": "0.0.0",
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/thlorenz/sandbox.git"
+  },
+  "engines": {
+    "node": "~0.6.6"
+  },
+  "dependencies": {
+      "jquery": ">=1.7"
+  },
+  "devDependencies": {}
+}

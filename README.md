@@ -6,7 +6,7 @@ Trying out various things related to javascript, jquery, nodejs etc.,
 
 ## Play with it
 
-    git clone git://github.com/thlorenz/sandbox-javascript.git
-    cd sandbox-javascript
+    git clone git://github.com/thlorenz/sandbox.git
+    cd sandbox
     npm install
 
