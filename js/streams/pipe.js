@@ -1,34 +1,42 @@
 var util = require('util')
   , stream = require('stream')
- // , cdir = require('cdir')
   ;
 
-
 function Publisher () {
-  var self = this;
-  stream.Stream.call(self);
-  self.readable = true;
+  stream.Stream.call(this);
+  this.readable = true;
 }
 
 util.inherits(Publisher, stream.Stream);
-var publisher = new Publisher();
 
 function Subscriber () {
-  var self = this;
-  stream.Stream.call(self);
-  self.writeable = true;
+  stream.Stream.call(this);
+  this.writeable = true;
 }
 
 util.inherits(Subscriber, stream.Stream);
+
+var publisher = new Publisher();
 var subscriber = new Subscriber();
 
 subscriber.on('pipe', function (pipe) {
-  pipe.on('data', function (data) {
-    console.log('Got: ', data);
-  });
+  pipe
+    .on('data', function (data) {
+      console.log('Data: ', data);
+    })
+    .on('cmd', function (cmd) {
+      console.log('Command: ', cmd.text);
+      cmd.run();
+    });
 });
 
 
 publisher.pipe(subscriber);
 
-publisher.emit('data', 'hello world');
+publisher.emit('data', 'hello');
+publisher.emit('data', 'world');
+
+publisher.emit('cmd', { 
+      text: 'have fun!'
+    , run: function () { console.log('we are having so much fun!'); }
+});
