@@ -8,7 +8,7 @@ Trying out various things related to javascript, jquery, nodejs etc.,
 
     git clone git://github.com/thlorenz/sandbox.git
 
-    # JavaScript:
+### JavaScript
 
     cd sandbox/js
     npm install
