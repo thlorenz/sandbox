@@ -11,7 +11,8 @@
     "node": "~0.8"
   },
   "dependencies": {
-    "jquery": "~1.7"
+    "jquery": "~1.7",
+    "cdir": "~0.1.2"
   },
   "devDependencies": {}
 }
