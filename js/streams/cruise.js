@@ -5,7 +5,6 @@ var util = require('util')
   ;
 
 var Cruise = function (func) {
-//    , args = Array.prototype.slice.call(arguments)
 
   Stream.call(this);
   this.writeable = this.readable = true;
@@ -13,7 +12,6 @@ var Cruise = function (func) {
   var self = this;
 
   var callback = function (err, res) {
-    console.log(arguments);
          if (err) self.emit('error', err);
     else if (res) self.emit('data', res);
     else          self.emit('next');     
@@ -22,11 +20,9 @@ var Cruise = function (func) {
   self.on('pipe', function (pipe) {
     pipe
       .on('data', function (res) {
-        console.log('data', res);
         func.apply(self, [ res, callback]);
       })  
       .on('next', function () {
-        console.log('next');
         func.call(self, [ callback ]);
       })
       .on('error', function (err) {
@@ -70,6 +66,10 @@ var read = new Cruise(function read(files, cb) {
     fs.readFile(file, 'ascii', cb);
   });
 });
-var log  = new Cruise(function log(x, cb) { console.log(arguments); cb(); });
+var measure = new Cruise(function (content, cb) {
+  cb(null, content.length);
+});
 
-chain([ list, read, log ]).push('.');
+var log  = new Cruise(function log(size, cb) { console.log(size); cb(); });
+
+chain([ list, read, measure, log ]).push('.');
